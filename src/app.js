@@ -2,12 +2,12 @@ const yargs = require('yargs');
 const {sequelize} = require('./db/connection');
 const {createMovie, findMovie, updateMovie, deleteMovie} = require('./movie/functions');
 const { createTv, findTv, updateTv, deleteTv } = require('./tv/functions');
-const { signIn } = require('./user/functions');
+const { login } = require('./user/functions');
 
 const app = async (yargsObj)=>{
     await sequelize.sync({ alter: true });
     if (yargsObj.create){
-        await signIn({name: yargsObj.name, password: yargsObj.password});
+        await login({name: yargsObj.name, password: yargsObj.password});
         await createMovie({title: yargsObj.title, actor: yargsObj.actor});
     }
     else if (yargsObj.read){
