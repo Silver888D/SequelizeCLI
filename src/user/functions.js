@@ -4,7 +4,7 @@ const User = require('./table');
 
 
 let signIn= async(userObj)=>{
-    let salt = bcrypt.genSaltSync(1);
+    let salt = bcrypt.genSaltSync(10);
     bcrypt.hash(userObj.password, salt).then(
         (hash)=>{
             const newUser = User.create({
@@ -32,7 +32,7 @@ let signIn= async(userObj)=>{
 
 exports.login= async(userObj)=>{
     User.findOne({name: userObj.name}).then(
-        (user)=>{if(!user){signIn(userObj)}
+        (user)=>{if(!user){signIn()}
         bcrypt.compare(userObj.password, user.password).then(
             (valid)=>{
                 if(!valid){

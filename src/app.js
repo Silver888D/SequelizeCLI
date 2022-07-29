@@ -5,7 +5,7 @@ const { createTv, findTv, updateTv, deleteTv } = require('./tv/functions');
 const { login } = require('./user/functions');
 
 const app = async (yargsObj)=>{
-    await sequelize.sync({ alter: true });
+    
     if (yargsObj.create){
         await login({name: yargsObj.name, password: yargsObj.password});
         await createMovie({title: yargsObj.title, actor: yargsObj.actor});
@@ -38,3 +38,5 @@ const app = async (yargsObj)=>{
 };
 
 app(yargs.argv);
+
+// await sequelize.sync({ alter: true });
